@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/BikeMindQuest.css">
+    <title>Bike Mind Quest</title>
+</head>
+<body>
+    <div id="quiz-container">
+        <div id="question-container">
+            <h2 id="question-text"></h2>
+            <ul id="options-list"></ul>
+        </div>
+        <div id="feedback-container">
+            <p id="feedback-text"></p>
+            <p id="points-text"></p>
+        </div>
+        <button id="next-btn">Next Question</button>
+    </div>
+    <div id="result-container">
+        <h2>Game Over</h2>
+        <p id="result-text"></p>
+        <p id="final-points"></p>
+        <button id="restart-btn">Restart Game</button>
+    </div>
+    <div id="timer-container">
+        <progress id="timer" max="60" value="60"></progress>
+    </div>
+    <button id="signUpBtn">Sign Up</button>
+    <button id="loginBtn">Login</button>
+    <script defer src="/js/BikeMindQuest.js"></script>
+</body>
+</html>
+
