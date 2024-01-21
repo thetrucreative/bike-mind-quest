@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using bike_mind_quest.Controllers.QuizController;
 using bike_mind_quest.Models.GameStateServiceModel;
 using bike_mind_quest.Models.QuizModels;
-
 
 namespace bike_mind_quest.Controllers.GamePlayController
 {

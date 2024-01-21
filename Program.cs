@@ -1,22 +1,10 @@
 using bike_mind_quest.Controllers.GBFSDataController;
 using bike_mind_quest.Controllers.QuizController;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Threading;
 using bike_mind_quest.Models.GameStateServiceModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<GeneralBikeshareFeedSpecificationDataController>();
 builder.Services.AddSingleton<CareemQuizController>();
@@ -34,7 +22,6 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -43,12 +30,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Serve static files
 app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthorization();
-app.UseSession(); // Add this line to enable session middleware
+app.UseSession(); 
 
 app.MapControllerRoute(
     name: "default",

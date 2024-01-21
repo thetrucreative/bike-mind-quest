@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using bike_mind_quest.Models.BikeModels;
+﻿using bike_mind_quest.Models.BikeModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -26,7 +23,7 @@ namespace bike_mind_quest.Controllers.GBFSDataController
 
                     if (!string.IsNullOrEmpty(careemResponseContent))
                     {
-                        // Deserialize JSON response content into CareemStationStatusModel
+                        // Deserializing the JSON response content into CareemStationStatusModel
                         var careemData = JsonConvert.DeserializeObject<CareemStationStatusModel>(careemResponseContent);
                         return Ok(careemData);
                     }
@@ -46,71 +43,6 @@ namespace bike_mind_quest.Controllers.GBFSDataController
                 return StatusCode(500, "Internal Server Error");
             }
         }
-
-        //[HttpGet("GetCareemStationStatus")]
-        //public async Task<ActionResult<CareemStationStatusModel>> GetCareemStationStatus()
-        //{
-        //    try
-        //    {
-        //        var careemClient = new HttpClient();
-        //        var careemRequest = new HttpRequestMessage(HttpMethod.Get, "https://dubai.publicbikesystem.net/customer/gbfs/v2/en/station_status");
-        //        var careemResponse = await careemClient.SendAsync(careemRequest);
-
-        //        if (careemResponse.IsSuccessStatusCode)
-        //        {
-        //            var careemResponseContent = await careemResponse.Content.ReadAsStringAsync();
-        //            Console.WriteLine($"START - GetCareemStationStatus Received Careem JSON: {careemResponseContent}");
-
-        //            if (!string.IsNullOrEmpty(careemResponseContent))
-        //            {
-        //                Console.WriteLine($"Received Careem JSON: {careemResponseContent}");
-        //                return Ok(careemResponseContent);
-        //            }
-        //            Console.WriteLine($"END - GetCareemStationStatus Received Careem JSON: {careemResponseContent}");
-        //        }
-
-        //        Console.WriteLine("Data unavailable!");
-        //        return null;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error acquiring data from 'GetCareemStationStatusModel': {ex.Message}");
-        //        return null;
-        //    }
-        //}
-
-        //[HttpGet("GetCareemStationStatus")]
-        //public async Task<CareemStationStatusModel> GetCareemStationStatus()
-        //{
-        //    try
-        //    {
-        //        var careemClient = new HttpClient();
-        //        var careemRequest = new HttpRequestMessage(HttpMethod.Get, "https://dubai.publicbikesystem.net/customer/gbfs/v2/en/station_status");
-        //        var careemResponse = await careemClient.SendAsync(careemRequest);
-
-        //        if (careemResponse.IsSuccessStatusCode)
-        //        {
-        //            var careemResponseContent = await careemResponse.Content.ReadAsStringAsync();
-        //            Console.WriteLine($"Received Careem JSON");
-        //            var careemData = JsonConvert.DeserializeObject<CareemStationStatusModel>(careemResponseContent);
-        //            Console.WriteLine($"Deserialized Careem Data successfully ", careemData);
-
-        //            if (careemData != null)
-        //            {
-        //                Console.WriteLine("Careem data is available!");
-        //                return careemData;
-        //            }
-        //        }
-
-        //        Console.WriteLine("Data unavailable!");
-        //        return null;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error acquiring data from 'GetCareemStationStatusModel': {ex.Message}");
-        //        return null;
-        //    }
-        //}
 
         [HttpGet("GetDonkeyRepublicStationInformation")]
         public async Task<ActionResult<DonkeyRepublicStationInformationModel>> GetDonkeyRepublicStationInformation()

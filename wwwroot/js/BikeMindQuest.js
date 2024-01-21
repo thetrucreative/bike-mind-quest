@@ -1,6 +1,7 @@
-﻿ocument.addEventListener('DOMContentLoaded', function () {
-    const signUpBtn = document.getElementById('signUpBtn');
-    const loginBtn = document.getElementById('loginBtn');
+﻿
+const signUpBtn = document.getElementById('signUpBtn');
+const loginBtn = document.getElementById('loginBtn');
+document.addEventListener('DOMContentLoaded', function () {
     const quizContainer = document.getElementById('quiz-container');
     const questionText = document.getElementById('question-text');
     const optionsList = document.getElementById('options-list');
@@ -18,8 +19,10 @@
     let timerValue = 60;
     let timerInterval;
     let quizQuestions = [];
+    let isLoggedIn = false;
 
-    nextBtn.disabled = true;
+    //nextBtn.disabled = true;
+    //nextBtn.disabled == true;
     quizContainer.style.display = 'none';
     resultContainer.style.display = 'none';
 
@@ -71,6 +74,7 @@
 
         authContainer.style.display = 'none';
         quizContainer.style.display = 'block';
+        //startGame();
     }
 
     function loginUser(username, password) {
@@ -84,27 +88,35 @@
             .then(response => response.json())
             .then(data => {
                 alert(data.Message);
+                isLoggedIn = true;
+                signUpBtn.disabled = true;
+                loginBtn.disabled = true;
                 startGame();
+                //getNextQuestion();
             })
             .catch(error => console.error(error));
 
         authContainer.style.display = 'none';
-        quizContainer.style.display = 'block';
-        startGame();
+        quizContainer.style.display = 'block';   
+        //getNextQuestion();
     }
 
     function startGame() {
-        nextBtn.disabled = false;
-        currentQuestionIndex = 0;
-        points = 0;
-        timerValue = 60;
-        resultContainer.style.display = 'none';
-        quizContainer.style.display = 'block';
-        updateTimerDisplay();
-        quizQuestions = [];
-        nextBtn.removeEventListener('click', handleNextQuestion);
-        nextBtn.addEventListener('click', handleNextQuestion);
-        timerInterval = setInterval(updateTimer, 1000);
+        if (isLoggedIn) {  
+            clearInterval(timerInterval);
+            //getNextQuestion();
+            nextBtn.disabled = false;
+            currentQuestionIndex = 0;
+            points = 0;
+            timerValue = 60;
+            resultContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            updateTimerDisplay();
+            quizQuestions = [];
+            nextBtn.removeEventListener('click', handleNextQuestion);
+            nextBtn.addEventListener('click', handleNextQuestion);
+            timerInterval = setInterval(updateTimer, 1000);
+        }
     }
 
     function handleNextQuestion() {
@@ -186,7 +198,8 @@
         console.log(`Current points: ${points}`);
         updatePointsDisplay();
         if (currentQuestionIndex === quizQuestions.length - 1) {
-            endGame();
+            console.log("Sorry, we ran out of questions.");
+            getNextQuestion();
         } else {
             currentQuestionIndex++;
             getNextQuestion();
@@ -210,5 +223,5 @@
     }
 
     restartBtn.addEventListener('click', restartGame);
-    startGame();
+    //startGame();
 });

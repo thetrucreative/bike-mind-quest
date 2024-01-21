@@ -1,11 +1,6 @@
 ﻿using bike_mind_quest.Controllers.GBFSDataController;
-using bike_mind_quest.Models.BikeModels;
 using bike_mind_quest.Models.QuizModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace bike_mind_quest.Controllers.QuizController
 {
