@@ -1,6 +1,6 @@
 Immerse yourself in the world of bike-sharing with interactive quizzes.
 
-Begin your quest now: www.bike-mind-quest
+Begin your quest now: [http://bike-mind-quest.com/bike-mind-quest](http://bike-mind-quest.com/bike-mind-quest)
 
 # Endpoints
 
@@ -31,4 +31,4 @@ The asynchronous flow of fetching data from GBFS makes the game slow at times.
 Enhance logging for the user on the UI
 Enhance Auth experience - possibly integrate with Google
 
-www.bike-mind-quest.com
+[www.bike-mind-quest.com](http://bike-mind-quest.com/bike-mind-quest)http://bike-mind-quest.com/bike-mind-quest
