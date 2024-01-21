@@ -1,6 +1,4 @@
-﻿// quiz.js
-
-document.addEventListener('DOMContentLoaded', function () {
+﻿ocument.addEventListener('DOMContentLoaded', function () {
     const signUpBtn = document.getElementById('signUpBtn');
     const loginBtn = document.getElementById('loginBtn');
     const quizContainer = document.getElementById('quiz-container');
@@ -196,7 +194,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updatePointsDisplay() {
-        pointsText.innerText = `Points: ${points}`;
+        const pointsText = document.getElementById('points-text');
+
+        if (pointsText) {
+            pointsText.innerText = `Points: ${points}`;
+        } else {
+            console.error('Element with ID "points-text" not found.');
+        }
     }
 
     function restartGame() {

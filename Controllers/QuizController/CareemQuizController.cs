@@ -2,10 +2,6 @@
 using bike_mind_quest.Models.BikeModels;
 using bike_mind_quest.Models.QuizModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace bike_mind_quest.Controllers.QuizController
 {
@@ -20,20 +16,26 @@ namespace bike_mind_quest.Controllers.QuizController
         }
 
         [HttpGet("GenerateQuizQuestions")]
-        [Produces("application/json")]
         public async Task<List<CareemQuizModel>> GenerateQuizQuestions()
         {
             try
             {
-                var careemData = await _dataController.GetCareemStationStatus();
-
-                if (careemData == null)
+                var careemDataActionResult = await _dataController.GetCareemStationStatusModel();
+                Console.WriteLine($"careemDataActionResult: {careemDataActionResult}");
+                if (careemDataActionResult == null || careemDataActionResult.Result is not OkObjectResult)
                 {
+                    Console.WriteLine("CareemDataActionResult is not OK or is null.");
                     return new List<CareemQuizModel>();
                 }
-
+                // Extracting CareemStationStatusModel from the ActionResult
+                var careemData = (careemDataActionResult.Result as OkObjectResult)?.Value as CareemStationStatusModel;
+                if (careemData == null)
+                {
+                    Console.WriteLine("careemData is null.");
+                    return new List<CareemQuizModel>();
+                }
                 var quizQuestions = new List<CareemQuizModel>();
-
+                Console.WriteLine($"quizQuestions: {quizQuestions}");
                 // Question 1
                 var question1 = new CareemQuizModel
                 {
@@ -65,14 +67,14 @@ namespace bike_mind_quest.Controllers.QuizController
         {
             var allStations = careemData?.Data?.Stations;
 
-            if (allStations != null && allStations.Count >= 4)
+            if (allStations != null && allStations.Length >= 4)
             {
                 var random = new Random();
                 var shuffledStations = allStations.OrderBy(x => random.Next()).ToList();
-
                 question.Options = shuffledStations.Take(4).Select(station => $"Station {station.StationId}").ToList();
                 question.ShuffledOptions = question.Options.ToList();
 
+                // Assigning correct answers based on question type
                 if (question.QuestionText.Contains("highest number of available docks"))
                 {
                     question.CorrectAnswer = GetStationWithHighestDocks(careemData, question.ShuffledOptions);
@@ -97,7 +99,7 @@ namespace bike_mind_quest.Controllers.QuizController
 
             foreach (var option in shuffledOptions)
             {
-                var stationId = option.Split(' ')[1];
+                var stationId = option.Split(' ')[1]; // Extract station id from the option
                 var station = careemData.Data?.Stations?.FirstOrDefault(s => s.StationId == stationId);
 
                 if (station != null && station.NumDocksAvailable > maxDocks)
