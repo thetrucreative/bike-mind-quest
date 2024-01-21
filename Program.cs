@@ -33,6 +33,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors(builder =>
+{
+    builder.WithOrigins("http://bike-mind-quest.com") // Update with your actual domain and protocol (HTTP/HTTPS)
+           .AllowAnyHeader()
+           .AllowAnyMethod();
+});
+
 app.UseAuthorization();
 app.UseSession(); 
 

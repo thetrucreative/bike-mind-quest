@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //nextBtn.disabled = true;
     //nextBtn.disabled == true;
+    
     quizContainer.style.display = 'none';
     resultContainer.style.display = 'none';
 
@@ -105,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isLoggedIn) {  
             clearInterval(timerInterval);
             //getNextQuestion();
+            
             nextBtn.disabled = false;
             currentQuestionIndex = 0;
             points = 0;
@@ -139,6 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function endGame() {
         clearInterval(timerInterval);
+        //signUpBtn.disabled = true;
+        //loginBtn.disabled = true;
         quizContainer.style.display = 'none';
         resultContainer.style.display = 'flex';
         const resultMessage = timerValue < 0 && points < 0 ? 'Sorry, you lost!' : (points >= 0 ? 'Congratulations! You won!' : 'Sorry, you lost!');
@@ -203,9 +207,8 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             currentQuestionIndex++;
             getNextQuestion();
-        }
+        } 
     }
-
     function updatePointsDisplay() {
         const pointsText = document.getElementById('points-text');
 
@@ -219,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function restartGame() {
         clearInterval(timerInterval);
         sessionStorage.removeItem('quizGameState');
-        startGame();
+        location.reload();
     }
 
     restartBtn.addEventListener('click', restartGame);

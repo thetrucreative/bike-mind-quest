@@ -99,7 +99,18 @@ namespace bike_mind_quest.Controllers.GamePlayController
                     }
                     else
                     {
-                        return BadRequest(new { Message = "No more questions available." });
+                        //return BadRequest(new { Message = "No more questions available." });
+                        _gameStateService.CurrentQuestionIndex = 0;//reset index as i have few questions
+
+                        var nextQuestion = GetNextQuestionByModelIndex();
+
+                        return Ok(new
+                        {
+                            nextQuestion.QuestionText,
+                            nextQuestion.Options,
+                            nextQuestion.CorrectAnswer,
+                            nextQuestion.ShuffledOptions,
+                        });
                     }
                 }
                 else
