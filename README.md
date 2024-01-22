@@ -27,9 +27,10 @@ Explore the Bike Mind Quest website and seamlessly integrate with the API using 
 ## Challenges
 - The asynchronous flow of fetching data from GBFS may lead to occasional slowness in the game.
 
-## Feature Requests
+## Future Feature Requests
 - Enhance logging for the user on the UI.
 - Improve the authentication experience, possibly by integrating with Google.
+- Integration with more services from GBFS (enhance DonkeyRepublicQuizController & LyftQuizController endpoints)
 
 ## Explore Now
 Visit [Bike Mind Quest](http://bike-mind-quest.com/bike-mind-quest) and delve into the excitement of bike-sharing quizzes!
